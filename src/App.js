@@ -1,10 +1,8 @@
 import React from 'react';
 import './App.css';
-import HomePageContainer from './components/home/HomePageContainer';
+import HomePageContainer from './pages/home/HomePageContainer';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-
-const Hats = () => <h1>Hats</h1>
+import Shop from './pages/shop/Shop';
 
 function App() {
   return (
@@ -12,7 +10,8 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
-          <Route path="/shop/:shopItem" component={Hats} />
+          <Route path="/shop" component={Shop} />
+          {/* <Route path="/shop/:shopItem" component={Hats} /> */}
         </Switch>
       </BrowserRouter>
     </div>
