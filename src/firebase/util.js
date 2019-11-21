@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/storage';
+import 'firebase/firestore';
 
 
 const config =  {
@@ -16,7 +16,7 @@ const config =  {
 firebase.initializeApp(config);
 
 export const AUTH = firebase.auth();
-export const STORAGE = firebase.storage();
+export const FIRE_STORAGE = firebase.firestore();
 
 // setting OAuth for google
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -26,4 +26,5 @@ export const signInWithGoogle = () => AUTH.signInWithRedirect(provider);
 const FIREBASE = firebase;
 
 export default FIREBASE;
+
 

@@ -6,6 +6,7 @@ import Shop from './pages/shop/Shop';
 import Header from './components/header/Header';
 import SignInSignUp from './pages/sign_in_sign_up/SignInSignUp';
 import { AUTH } from './firebase/util';
+import { createUser } from './firebase/crud';
 
 
 class App extends Component {
@@ -17,8 +18,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.authUnSubscription = AUTH.onAuthStateChanged(user => {
-      this.setState(() => ({ currentUser: user }));
+    this.authUnSubscription = AUTH.onAuthStateChanged(async userAuth => {
+      const userRef = await createUser(userAuth);
+      if (userRef) {
+        userRef.onSnapshot(snapShot => {
+          this.setState(() => ({ currentUser: {
+            id: snapShot.id,
+            ...snapShot.data()
+          } }));
+        })
+      }
     })
   }
 
